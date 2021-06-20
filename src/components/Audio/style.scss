@@ -1,0 +1,60 @@
+.audio{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__content{
+        flex: 0 1 500px;
+        background: #fff;
+        margin: 0 auto;
+        height: 100%;
+        padding: 40px 20px;
+        border-radius: 20px;
+    }
+}
+
+.slider-audio{
+    display: flex;
+    align-items: center;
+
+    .noUi-target{
+        flex: 1 1 auto;
+        margin: 0 12px 0 10px;
+        height: 10px;
+        background: transparent;
+        border: none;
+        border-radius: 10px;
+        box-shadow: none;
+    }
+
+    .noUi-connects{
+        background: #0B032D;
+        border-radius: 10px;
+    }
+
+    .noUi-connect{
+        background: #FFAD32;
+    }
+
+    .noUi-handle{
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: none;
+        box-shadow: none;
+        background: #FFAD32;
+        right: -10px;
+        top: -4.5px;
+
+         &:before, &:after{
+            content: '';
+            display: none;
+        }
+    }
+
+    &__time{
+        flex: 0 0 auto;
+        font-size: 14px;
+        color: #0B032D;
+    }
+}
