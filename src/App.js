@@ -1,11 +1,12 @@
 import Audio from "./components/Audio";
-import Test from "./components/Test";
 import music from './assets/audio/venus-jupiter.mp3';
+import music2 from './assets/audio/city-under-the-sole.mp3';
+import songImg from './assets/img/song/01.jpg';
 
 function App() {
   return (
     <div className="wrapper">
-      <Audio audio={music} />
+      <Audio title={'Венера-Юпитер'} img={songImg} audio={music} />
     </div>
   );
 }
