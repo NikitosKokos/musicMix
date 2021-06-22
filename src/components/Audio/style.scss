@@ -59,20 +59,7 @@
             transition: all .3s ease-in-out;
         }
 
-        &_prev{
-            width: 50px;
-            height: 40px;
-
-            @media (min-width: $md2+px){
-                &:hover{
-                    svg path{
-                        fill: #FFAD32;
-                    }
-                }
-            }
-        }
-
-        &_next{
+        &_arrow{
             width: 50px;
             height: 40px;
 
