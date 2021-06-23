@@ -5,9 +5,10 @@ import defaultSongImage from '../../assets/img/defaultSongImage.jpg';
 import './style.scss';
 
 const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
-    const { title, img, audio } = songs[currentAudioIndex];
+    const { title, img, song } = songs[currentAudioIndex];
     const audioRef = React.useRef(null);
     const [audioStart, setAudioStart] = React.useState(0);
+    const [currentFormattingTime, setCurrentFormattingTime] = React.useState(0.00);
     const [duration, setDuration] = React.useState(null);
     const [formattingDuration, setFormattingDuration] = React.useState(null);
     const [isPlay, setIsPlay] = React.useState(false);
@@ -26,14 +27,18 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
                 if(currentAudioIndex === songs.length - 1){
                     changeAudioIndex(0);
                 }else{
-                    changeAudioIndex(currentAudioIndex + 1)
+                    changeAudioIndex(currentAudioIndex + 1);
                 }
+                break;
             case 'prev':
                 if(currentAudioIndex === 0){
                     changeAudioIndex(songs.length - 1);
                 }else{
-                    changeAudioIndex(currentAudioIndex - 1)
+                    changeAudioIndex(currentAudioIndex - 1);
                 }
+                break;
+            default:
+                break;
         }
     }
 
@@ -41,6 +46,8 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
         setFormattingDuration(formattingTime(audioRef.current.duration));
         setDuration(Math.floor(audioRef.current.duration));
         setAudioStart(Math.round(audioRef.current.currentTime));
+        setFormattingTimeInterval();
+        if(isPlay) play();
     }
 
     const play = () => {
@@ -59,8 +66,19 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
 
     const setTimeInterval = () => {
         timeInterval = setInterval(() => {
+            if(Math.floor(audioRef.current.currentTime) === duration){
+                setTimeout(() => {
+                    onChangeAudio('next');
+                }, 1000);
+            }
             setAudioStart(audioRef.current.currentTime);
         }, 10);
+    }
+
+    const setFormattingTimeInterval = () => {
+        setInterval(() => {
+            setCurrentFormattingTime(formattingTime(audioRef.current.currentTime));
+        }, 100);
     }
 
     const onChange = ([newTime]) => {
@@ -81,22 +99,22 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
         setIsPlay(false);
     }
 
-    const ChangeVolume = (action) => {
-        if(action === 'plus' && audioRef.current.volume < 1){
-            audioRef.current.volume = Number((audioRef.current.volume + 0.1).toFixed(1))
-        }else if(action === 'minus' && audioRef.current.volume > 0){
-            audioRef.current.volume = Number((audioRef.current.volume - 0.1).toFixed(1))
-        }
-    }
+    // const ChangeVolume = (action) => {
+    //     if(action === 'plus' && audioRef.current.volume < 1){
+    //         audioRef.current.volume = Number((audioRef.current.volume + 0.1).toFixed(1))
+    //     }else if(action === 'minus' && audioRef.current.volume > 0){
+    //         audioRef.current.volume = Number((audioRef.current.volume - 0.1).toFixed(1))
+    //     }
+    // }
 
     return (
         <div className='audio'>
             <div className="audio__content">
                 <div className="audio__img"><img src={img ? img : defaultSongImage} alt="song" /></div>
                 <h3 className="audio__title">{ title }</h3>
-                <audio className='audio__player' id="player" src={audio} onLoadedMetadata={onLoadedMetadata} ref={audioRef}></audio>
+                <audio className='audio__player' id="player" src={song} onLoadedMetadata={onLoadedMetadata} ref={audioRef}></audio>
                 {!!duration && <div className="audio__slider slider-audio">
-                    <div className="slider-audio__time">{ formattingTime(audioStart) || '0.00' }</div>
+                    <div className="slider-audio__time">{ currentFormattingTime }</div>
                     <Nouislider
                         start={audioStart}
                         connect={[true, false]}
@@ -121,10 +139,13 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
                     {
                         isPlay 
                         ? <button className='audio__btn' onClick={onPause}>
-                            <svg viewBox="0 0 512 512"><g><path fill='#843B62' d="M224,435.8V76.1c0-6.7-5.4-12.1-12.2-12.1h-71.6c-6.8,0-12.2,5.4-12.2,12.1v359.7c0,6.7,5.4,12.2,12.2,12.2h71.6   C218.6,448,224,442.6,224,435.8z"/><path fill='#843B62' d="M371.8,64h-71.6c-6.7,0-12.2,5.4-12.2,12.1v359.7c0,6.7,5.4,12.2,12.2,12.2h71.6c6.7,0,12.2-5.4,12.2-12.2V76.1   C384,69.4,378.6,64,371.8,64z"/></g></svg>
+                            <svg viewBox="0 0 350 350">
+                                <rect x="65" y="60" width="90" height="240" rx="20" fill="#843B62"/>
+                                <rect x="197" y="60" width="90" height="240" rx="20" fill="#843B62"/>
+                            </svg>
                         </button> 
                         : <button className='audio__btn' onClick={onPlay}>
-                            <svg viewBox="0 0 32 32"><title/><g><path fill='#843B62' d="M26.78,13.45,11.58,4A3,3,0,0,0,7,6.59V25.41a3,3,0,0,0,3,3A3,3,0,0,0,11.58,28l15.2-9.41a3,3,0,0,0,0-5.1Z"/></g></svg>
+                            <svg viewBox="1 0 32 32"><title/><g><path fill='#843B62' d="M26.78,13.45,11.58,4A3,3,0,0,0,7,6.59V25.41a3,3,0,0,0,3,3A3,3,0,0,0,11.58,28l15.2-9.41a3,3,0,0,0,0-5.1Z"/></g></svg>
                         </button> 
                     }
                     <button className='audio__btn audio__btn_arrow' onClick={() => onChangeAudio('next')}>
