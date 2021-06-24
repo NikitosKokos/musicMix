@@ -28,7 +28,8 @@
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-	background: #843B62;
+	// background: linear-gradient(to bottom, #843B62 20%, #0B032D);
+	background: linear-gradient(to right top, #0B032D, darken(#843B62, 10%));
 	&._loaded {
 	}
 }

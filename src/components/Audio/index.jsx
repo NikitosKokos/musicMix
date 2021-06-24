@@ -13,6 +13,13 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
     const [formattingDuration, setFormattingDuration] = React.useState(null);
     const [isPlay, setIsPlay] = React.useState(false);
     let timeInterval;
+    let formattingTimeInterval;
+
+    React.useEffect(() => {
+        return () => {
+            clearInterval(formattingTimeInterval);
+        }
+    }, []);
 
     const formattingTime = (currentTime) => {
         const minutes = Math.floor(currentTime / 60);
@@ -76,7 +83,7 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
     }
 
     const setFormattingTimeInterval = () => {
-        setInterval(() => {
+        formattingTimeInterval = setInterval(() => {
             setCurrentFormattingTime(formattingTime(audioRef.current.currentTime));
         }, 100);
     }
