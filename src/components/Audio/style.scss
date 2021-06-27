@@ -14,6 +14,10 @@
         padding: 225px 20px 40px 20px;
         border-radius: 20px;
         position: relative;
+
+        @media (max-width: $md4+px){
+           border-radius: 15px;
+        }
     }
 
     &__img{
@@ -49,11 +53,27 @@
     }
 
     &__btn{
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         background: transparent;
         border: none;
         box-shadow: none;
+        border-radius: 50%;
+        transition: all .3s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media (min-width: $md2+px){
+            &:hover{
+                background: rgb(221, 221, 221);
+            }
+        }
+
+        svg{
+            width: 50px;
+            height: 50px;
+        }
 
         svg path{
             transition: all .3s ease-in-out;
@@ -65,16 +85,17 @@
 
             @media (min-width: $md2+px){
                 &:hover{
+                    background: transparent;
                     svg path{
                         fill: #FFAD32;
                     }
                 }
             }
-        }
 
-        svg{
-            width: 100%;
-            height: 100%;
+            svg{
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 }
@@ -108,7 +129,7 @@
         border-radius: 50%;
         border: none;
         box-shadow: none;
-        background: #FFAD32;
+        background: darken(#FFAD32, 10%);
         right: -10px;
         top: -4.5px;
         transition: transform .1s ease-in;

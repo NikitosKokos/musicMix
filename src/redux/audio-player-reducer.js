@@ -1,7 +1,7 @@
 import music from '../assets/audio/venus-jupiter.mp3';
-import music2 from '../assets/audio/city-under-the-sole.mp3';
+import music2 from '../assets/audio/end-of-the-road.mp3';
 import music3 from '../assets/audio/Grover-Washington-Jr-Just-The-Two-Of-Us.mp3';
-import music4 from '../assets/audio/end-of-the-road.mp3';
+import music4 from '../assets/audio/city-under-the-sole.mp3';
 import songImg from '../assets/img/song/01.jpg';
 import songImg3 from '../assets/img/song/03.jpg';
 
@@ -18,7 +18,7 @@ let initialState = {
         },
         {
           id: 2,
-          title: 'Город под подошвой',
+          title: 'End Of The Road',
           img: null,
           song: music2
         },
@@ -29,11 +29,11 @@ let initialState = {
           song: music3
         },
         {
-            id: 4,
-            title: 'End Of The Road',
-            img: null,
-            song: music4
-          },
+          id: 4,
+          title: 'Город под подошвой',
+          img: null,
+          song: music4
+        },
       ]
 }
 

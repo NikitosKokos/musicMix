@@ -31,7 +31,7 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="header__buttons">
-                    <Link to='/list' className="header__list-btn">
+                    <Link to='/list' className="header__button header__button_list">
                         <svg viewBox="0 0 406 304" fill="none">
                         <rect x="106" y="304" width="80" height="300" rx="40" transform="rotate(-90 106 304)" fill="white"/>
                         <circle cx="43" cy="264" r="40" fill="white"/>
@@ -41,7 +41,7 @@ const Header = () => {
                         <circle cx="43" cy="152" r="40" fill="white"/>
                         </svg>
                     </Link>
-                    <Link to='/add' className="header__add-btn">
+                    <Link to='/add' className="header__button header__button_add">
                         <svg viewBox="0 0 300 300" fill="none">
                         <rect x="110" width="80" height="300" rx="40" fill="white"/>
                         <rect y="190" width="80" height="300" rx="40" transform="rotate(-90 0 190)" fill="white"/>

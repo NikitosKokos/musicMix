@@ -1,3 +1,5 @@
+@import '../../assets/scss/base/variables';
+
 .header{
     position: fixed;
     top: 0;
@@ -28,8 +30,8 @@
     &__search{
         position: relative;
         width: 200px;
-        height: 30px;
-        border-radius: 8px;
+        height: 33px;
+        border-radius: 18px;
         overflow: hidden;
         background: #fff;
         display: flex;
@@ -45,8 +47,10 @@
         top: 0;
         left: 0;
         background: transparent;
-        padding: 0 40px 0 20px;
+        padding: 0 30px 0 20px;
         color: #0B032D;
+        font-weight: 500;
+        font-size: 18px;
 
         &::placeholder{
             color: #aaa;
@@ -57,32 +61,107 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        right: 15px;
+        right: 2px;
         background: transparent;
         box-shadow: none;
-        width: 15px;
-        height: 15px;
+        width: 30px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         svg{
-            width: 100%;
-            height: auto;
+            width: 15px;
+            height: 15px;
+
+            rect, circle{
+                transition: all .3s ease-in-out;
+            }
+        }
+
+        @media (min-width: $md2+px){
+            &:hover{
+                svg{
+                    circle{
+                        stroke: #FFAD32;
+                    }
+
+                    rect{
+                        fill: #FFAD32;
+                    }
+                }
+            }
         }
     }
 
-    &__list-btn{
-        margin: 0px 15px 0px 0px;
-        svg{
-            width: auto;
-            height: 30px;
-        }
+    &__buttons{
+        display: flex;
+        align-items: center;
     }
 
-    &__add-btn{
+    &__button{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        transition: all .3s ease-in-out;
+        // background: rgba(238, 238, 238, 0.3);
 
-        svg{
-            width: auto;
-            height: 30px;
+        @media (min-width: $md2+px){
+            &:hover{
+                background: rgba(238, 238, 238, 0.3);
+            }
         }
+
+        &_list{
+            margin: 0px 5px 0px 0px;
+
+            svg{
+                width: auto;
+                height: 25px;
+    
+                rect, circle{
+                    transition: all .3s ease-in-out;
+                }
+            }
+        }
+
+        &_add{
+            svg{
+                width: auto;
+                height: 30px;
+    
+                rect{
+                    transition: all .3s ease-in-out;
+                }
+            }
+        }
+
+        // @media (min-width: $md2+px){
+        //     &:hover{
+        //         svg{
+        //             circle{
+        //                 fill: lighten(#FFAD32, 10%);
+        //             }
+
+        //             rect{
+        //                 fill: #FFAD32;
+        //             }
+        //         }
+        //     }
+        // }
+
+        // @media (min-width: $md2+px){
+        //     &:hover{
+        //         svg{
+        //             rect{
+        //                 fill: #FFAD32;
+        //             }
+        //         }
+        //     }
+        // }
     }
 
 }
