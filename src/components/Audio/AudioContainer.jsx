@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Audio from ".";
-import { setCurrentAudioIndex } from '../../redux/audio-player-reducer';
+import { setCurrentAudioIndex } from '../../redux/audio-reducer';
+import { getCurrentAudioIndex, getSongs } from "../../redux/audio-selectors";
 
 
 const AudioContainer = ({ currentAudioIndex, songs, setCurrentAudioIndex }) => (
@@ -12,8 +13,8 @@ const AudioContainer = ({ currentAudioIndex, songs, setCurrentAudioIndex }) => (
     />);
 
 const mapStateToProps = (state) => ({
-    currentAudioIndex: state.audioPlayer.currentAudioIndex,
-    songs: state.audioPlayer.songs,
+    currentAudioIndex: getCurrentAudioIndex(state),
+    songs: getSongs(state),
 });
 
 export default compose(

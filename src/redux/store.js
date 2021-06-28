@@ -1,9 +1,9 @@
 import { combineReducers, createStore } from "redux";
-import audioPlayerReducer from "./audio-player-reducer";
+import audioReducer from "./audio-reducer";
 
 
 let reducers = combineReducers({
-    audioPlayer: audioPlayerReducer,
+    audio: audioReducer,
 });
 
 const store = createStore(reducers);
