@@ -1,0 +1,75 @@
+@import '../../assets/scss/base/variables';
+
+.notFound{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    background: linear-gradient(to right top, #0B032D, darken(#843B62, 10%));
+
+    &__content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 100px auto 40px auto;
+    }
+
+    &__title{
+        color: #fff;
+        font-weight: 700;
+        font-size: 180px;
+        line-height: .9;
+    }
+
+    &__descr{
+        color: #fff;
+        font-weight: 500;
+        font-size: 18px;
+        margin: 0px 0px 30px 0px;
+    }
+
+    &__btn{
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 30px;
+        font-size: 18px;
+        border-radius:  25px;
+        background: #fff;
+        color: #843B62;
+        position: relative;
+        overflow: hidden;
+        transition: all .5s ease-in-out;
+
+         &:after{
+            content: '';
+            background: #0B032D;
+            border-radius: 50%;
+            transition: all .5s ease-in-out;
+            position: absolute;
+            top: var(--y);
+            left: var(--x);
+            transform: translate(-50% , -50%);
+            height: 0;
+            width: 0;
+            z-index: 1;
+        }
+
+        span{
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (min-width: $md2+px){
+            &:hover{
+                background: transparent;
+                 &:after{
+                    width: 250px;
+                    height: 250px;
+                }
+            }
+        }
+    }
+}

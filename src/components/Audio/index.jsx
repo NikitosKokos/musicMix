@@ -12,6 +12,7 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
     const [duration, setDuration] = React.useState(null);
     const [formattingDuration, setFormattingDuration] = React.useState(null);
     const [isPlay, setIsPlay] = React.useState(false);
+    const [isInitializedAudio, setIsInitializedAudio] = React.useState(false);
     let timeInterval;
     let formattingTimeInterval;
 
@@ -29,6 +30,7 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
     }
 
     const onChangeAudio = (action) => {
+        setIsInitializedAudio(false);
         switch(action){
             case 'next':
                 if(currentAudioIndex === (songs.length - 1)){
@@ -54,6 +56,7 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
         setDuration(Math.floor(audioRef.current.duration));
         setAudioStart(Math.round(audioRef.current.currentTime));
         setFormattingTimeInterval();
+        setIsInitializedAudio(true);
         if(isPlay) play();
     }
 
@@ -123,7 +126,8 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
                 <div className="audio__img"><img src={img ? img : defaultSongImage} alt="song" /></div>
                 <h3 className="audio__title">{ title }</h3>
                 <audio className='audio__player' id="player" src={song} onEnded={onEnded} onLoadedMetadata={onLoadedMetadata} ref={audioRef}></audio>
-                {!!duration && <div className="audio__slider slider-audio">
+                {isInitializedAudio 
+                ? <div className="audio__slider slider-audio">
                     <div className="slider-audio__time">{ currentFormattingTime }</div>
                     <Nouislider
                         start={audioStart}
@@ -138,6 +142,11 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
                         onEnd={onEnd}
                     />
                     <div className="slider-audio__time">{ formattingDuration }</div>
+                </div>
+                : <div className="audio__preloader preloader-audio">
+                    <div className="preloader-audio__time"></div>
+                    <div className="preloader-audio__line"></div>
+                    <div className="preloader-audio__time"></div>
                 </div>}
                 <div className='audio__buttons'>
                     <button className=' audio__btn audio__btn_arrow' onClick={() => onChangeAudio('prev')}>
