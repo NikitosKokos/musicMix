@@ -18,8 +18,16 @@
     &__title{
         color: #fff;
         font-weight: 700;
-        font-size: 180px;
+        font-size: 250px;
         line-height: .9;
+
+        @media (max-width: $md3+px){
+           font-size: 200px;
+        }
+
+        @media (max-width: $md4+px){
+            font-size: 180px;
+        }
     }
 
     &__descr{
@@ -27,6 +35,14 @@
         font-weight: 500;
         font-size: 18px;
         margin: 0px 0px 30px 0px;
+
+        @media (max-width: $md3+px){
+            font-size: 16px;
+        }
+
+        @media (max-width: $md4+px){
+            font-size: 14px;
+        }
     }
 
     &__btn{
@@ -55,6 +71,12 @@
             height: 0;
             width: 0;
             z-index: 1;
+        }
+
+        &:active{
+            &:after{
+                background: transparent;
+            }
         }
 
         span{

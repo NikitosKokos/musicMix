@@ -8,8 +8,10 @@ const NotFound = () => {
         const x = e.pageX - e.target.offsetLeft;
         const y = e.pageY - e.target.offsetTop;
 
-        e.target.style.setProperty('--x',`${x}px`);
-        e.target.style.setProperty('--y',`${y}px`);
+        if(e.target.classList.contains('notFound__btn')){
+            e.target.style.setProperty('--x',`${x}px`);
+            e.target.style.setProperty('--y',`${y}px`);
+        }
     }
 
     return (
@@ -17,7 +19,7 @@ const NotFound = () => {
             <div className="notFound__content">
                 <h1 className="notFound__title">404</h1>
                 <div className="notFound__descr">Page not found, please go back to home page</div>
-                <Link to='/' onMouseMove={hoverBtn} className='notFound__btn'><span>Home</span></Link>
+                <Link to='/' onMouseLeave={hoverBtn} onMouseMove={hoverBtn} className='notFound__btn'><span>Home</span></Link>
             </div>
         </div>
     )

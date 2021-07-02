@@ -30,10 +30,9 @@
     &__search{
         position: relative;
         width: 200px;
-        height: 33px;
+        height: 35px;
         border-radius: 18px;
         overflow: hidden;
-        background: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -46,14 +45,24 @@
         position: absolute;
         top: 0;
         left: 0;
-        background: transparent;
+        background: #fff;
         padding: 0 30px 0 20px;
         color: #0B032D;
         font-weight: 500;
         font-size: 18px;
+        transition: all .3s ease-in-out;
 
         &::placeholder{
             color: #aaa;
+            transition: all .3s ease-in-out;
+        }
+
+        &:focus{
+            background: #eee;
+
+            &::placeholder{
+                color: #888;
+            }
         }
     }
 
@@ -133,15 +142,18 @@
             }
         }
 
+        &_heart{
+            svg{
+                width: auto;
+                height: 30px;
+            }
+        }
+
         &_list{
 
             svg{
                 width: auto;
                 height: 25px;
-    
-                rect, circle{
-                    transition: all .3s ease-in-out;
-                }
             }
         }
 
@@ -149,10 +161,6 @@
             svg{
                 width: auto;
                 height: 30px;
-    
-                rect{
-                    transition: all .3s ease-in-out;
-                }
             }
         }
     }

@@ -4,8 +4,8 @@ import "nouislider/distribute/nouislider.css";
 import defaultSongImage from '../../assets/img/defaultSongImage.jpg';
 import './style.scss';
 
-const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
-    const { title, img, song } = songs[currentAudioIndex];
+const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) => {
+    const { title, img, song, favorite, id } = songs[currentAudioIndex];
     const audioRef = React.useRef(null);
     const [audioStart, setAudioStart] = React.useState(0);
     const [currentFormattingTime, setCurrentFormattingTime] = React.useState(0.00);
@@ -13,14 +13,36 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
     const [formattingDuration, setFormattingDuration] = React.useState(null);
     const [isPlay, setIsPlay] = React.useState(false);
     const [isInitializedAudio, setIsInitializedAudio] = React.useState(false);
-    let timeInterval;
-    let formattingTimeInterval;
+    const [timeInterval, setTimeInterval] = React.useState(null);
+    const [formattingTimeInterval, setFormattingTimeInterval] = React.useState(null);
 
     React.useEffect(() => {
         return () => {
             clearInterval(formattingTimeInterval);
+            if(timeInterval) clearTimeInterval();
         }
     }, []);
+
+    // const createRandomArray = arr => {
+    //     const newArr = [...arr];
+    //     let currentIndex = newArr.length,  randomIndex;
+
+    //     // While there remain elements to shuffle...
+    //     while (0 !== currentIndex) {
+      
+    //       // Pick a remaining element...
+    //       randomIndex = Math.floor(Math.random() * currentIndex);
+    //       currentIndex--;
+      
+    //       // And swap it with the current element.
+    //       [newArr[currentIndex], newArr[randomIndex]] = [
+    //         newArr[randomIndex], newArr[currentIndex]];
+    //     }
+      
+    //     return newArr;
+    // }
+
+    // console.log(createRandomArray(songs));
 
     const formattingTime = (currentTime) => {
         const minutes = Math.floor(currentTime / 60);
@@ -55,7 +77,7 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
         setFormattingDuration(formattingTime(audioRef.current.duration));
         setDuration(Math.floor(audioRef.current.duration));
         setAudioStart(Math.round(audioRef.current.currentTime));
-        setFormattingTimeInterval();
+        startFormattingTimeInterval();
         setIsInitializedAudio(true);
         if(isPlay) play();
     }
@@ -70,7 +92,7 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
 
     const play = () => {
         audioRef.current.play();
-        setTimeInterval();
+        startTimeInterval();
     }
 
     const pause = () => {
@@ -82,16 +104,16 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
         clearInterval(timeInterval);
     }
 
-    const setTimeInterval = () => {
-        timeInterval = setInterval(() => {
+    const startTimeInterval = () => {
+        setTimeInterval(setInterval(() => {
             setAudioStart(audioRef.current.currentTime);
-        }, 100);
+        }, 100));
     }
 
-    const setFormattingTimeInterval = () => {
-        formattingTimeInterval = setInterval(() => {
+    const startFormattingTimeInterval = () => {
+        setFormattingTimeInterval(setInterval(() => {
             setCurrentFormattingTime(formattingTime(audioRef.current.currentTime));
-        }, 100);
+        }, 100));
     }
 
     const onChange = ([newTime]) => {
@@ -112,6 +134,10 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
         setIsPlay(false);
     }
 
+    const onFavoriteChange = () => {
+        changeFavorite(id, !favorite);
+    }
+
     // const ChangeVolume = (action) => {
     //     if(action === 'plus' && audioRef.current.volume < 1){
     //         audioRef.current.volume = Number((audioRef.current.volume + 0.1).toFixed(1))
@@ -123,6 +149,14 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex }) => {
     return (
         <div className='audio'>
             <div className="audio__content">
+                <div className="audio__favorites">
+                    <button className={`audio__btn audio__btn_heart ${favorite ? 'active': ''}`} onClick={onFavoriteChange}>
+                        <svg viewBox="0 0 358 323" fill="none">
+                        <path d="M71 4C128.2 -12.4 167.167 31.5 179.5 55.5C179.5 43.5 233 -18 293 7C341 27 355 66.6667 356 84C366.4 116.8 328 175.667 307.5 201C250.7 269 198.167 310.333 179 322.5C131.8 291.3 76.6667 232.833 55 207.5C12.2 161.1 0.833331 112.833 0.499997 94.5C0.166663 71.1667 13.8 20.4 71 4Z" fill="#bbb"/>
+                        <path d="M287.247 4C230.047 -12.4 191.081 31.5 178.747 55.5C178.747 43.5 125.247 -18 65.2474 7C17.2474 27 3.24744 66.6667 2.24744 84C-8.15256 116.8 30.2474 175.667 50.7474 201C107.547 269 160.081 310.333 179.247 322.5C226.447 291.3 281.581 232.833 303.247 207.5C346.047 161.1 357.414 112.833 357.747 94.5C358.081 71.1667 344.447 20.4 287.247 4Z" fill="#bbb"/>
+                        </svg>
+                    </button>
+                </div>
                 <div className="audio__img"><img src={img ? img : defaultSongImage} alt="song" /></div>
                 <h3 className="audio__title">{ title }</h3>
                 <audio className='audio__player' id="player" src={song} onEnded={onEnded} onLoadedMetadata={onLoadedMetadata} ref={audioRef}></audio>
