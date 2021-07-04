@@ -7,11 +7,35 @@
     justify-content: center;
     padding: 0 10px;
     background: linear-gradient(to right top, #0B032D, darken(#843B62, 10%));
+
+    &__content{
+        flex: 0 1 500px;
+        margin: 140px auto 40px auto;
+        height: 100%;
+    }
+
+    &__buttons{
+        margin: 20px 0px 0px 0px;
+    }
+
+    &__btn{
+        input{
+            
+        }
+    }
+}
+
+.player{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
     &__content{
         flex: 0 1 500px;
         background: #fff;
-        margin: 140px auto 40px auto;
+        box-shadow: 0px 3px 10px #eee;
         height: 100%;
         padding: 225px 20px 40px 20px;
         border-radius: 20px;
@@ -187,7 +211,7 @@
     }
 }
 
-.preloader-audio{
+.preloader-player{
     display: flex;
     align-items: center;
     &__line{
@@ -237,7 +261,7 @@
     }
 }
 
-.slider-audio{
+.slider-player{
     display: flex;
     align-items: center;
 

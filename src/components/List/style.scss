@@ -1,0 +1,21 @@
+
+
+.list{
+    padding: 0 10px;
+    display: flex;
+    &__content{
+        flex: 0 1 500px;
+        margin: 100px auto 40px auto;
+    }
+
+    &__title{
+        font-size: 40px;
+        font-weight: 700;
+        color: #0B032D;
+        margin: 0px 0px 20px 0px;
+    }
+
+    &__body{
+
+    }
+}

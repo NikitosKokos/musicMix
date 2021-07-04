@@ -7,9 +7,9 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import List from "./components/List";
 import Add from "./components/Add";
 import NotFound from "./components/NotFound";
+import ListContainer from "./components/List/ListContainer";
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
                 <AudioContainer />
             </Route>
             <Route path='/list'>
-                <List />
+                <ListContainer />
             </Route>
             <Route path='/add'>
                 <Add />

@@ -1,0 +1,118 @@
+@import '../../../assets/scss/base/variables';
+
+.song{
+    margin: 0px 0px 15px 0px;
+    &__content{
+        display: flex;
+        align-items: center;
+        background: rgb(247, 247, 247);
+        box-shadow: 0px 3px 10px #eee;
+        padding: 20px 10px;
+        border-radius: 10px;
+    }
+
+    &__img{
+        flex: 0 0 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 5px;
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__body{
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0px 10px 0px 20px;
+    }
+
+    &__title{
+        font-size: 20px;
+        font-weight: 500;
+        color: #0B032D;
+        margin: 0px 0px 20px 0px;
+    }
+
+    &__buttons{
+        flex: 0 0 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__btn{
+        width: 60px;
+        height: 60px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        &:before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: scale(0);
+            background: rgb(221, 221, 221);
+            transition: all .3s ease-in-out;
+            border-radius: 50%;
+        }
+
+        @media (min-width: $md2+px){
+            &:hover{
+                &:before{
+                    transform: scale(1);
+                }
+            }
+        }
+
+        svg{
+            width: 50px;
+            height: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        svg path{
+            transition: all .3s ease-in-out;
+        }
+
+        &_heart{
+            width: 50px;
+            height: 50px;
+
+             &:before{
+                background: #eee;
+            }
+
+            &.active{
+                &:before{
+                    background: #ffd5eb;
+                }
+
+                svg{
+                    path{
+                        fill: #843B62;
+                    }
+                }
+            }
+
+            svg{
+                width: auto;
+                height: 30px;
+            }
+        }
+    }
+}

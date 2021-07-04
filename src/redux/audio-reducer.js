@@ -9,9 +9,11 @@ import songImg5 from '../assets/img/song/05.jpg';
 
 const SET_CURRENT_AUDIO_INDEX = 'audio/SET_CURRENT_AUDIO_INDEX';
 const CHANGE_FAVORITE = 'audio/CHANGE_FAVORITE';
+const SET_SONGS_TYPE = 'audio/SET_SONGS_TYPE';
 
 let initialState = {
     currentAudioIndex: 0,
+    songsType: 'list',
     songs: [
       {
         id: 1,
@@ -66,6 +68,11 @@ const audioReducer = (state = initialState, action) => {
                     return song;
                   })
               }
+          case SET_SONGS_TYPE:
+            return {
+              ...state,
+              songsType: action.payload
+          }
         default:
             return state;
     }
@@ -73,5 +80,6 @@ const audioReducer = (state = initialState, action) => {
 
 export const setCurrentAudioIndex = (payload) => ({ type: SET_CURRENT_AUDIO_INDEX, payload });
 export const changeFavorite = (id, favorite) => ({ type: CHANGE_FAVORITE, id, favorite });
+export const setSongsType = (payload) => ({ type: SET_SONGS_TYPE, payload });
 
 export default audioReducer;
