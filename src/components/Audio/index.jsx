@@ -10,6 +10,10 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
     React.useEffect(() => {
         changeSongsArray();
     }, []);
+    
+    React.useEffect(() => {
+        if(songsType === 'favorite') changeSongsArray();
+    }, [songs]);
 
     React.useEffect(() => {
         changeSongsArray();
@@ -19,14 +23,24 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
         switch(songsType){
             case 'list':
                 setSongsArr(songs);
+                changeAudioIndex(0);
                 break;
             case 'mix':
-                const newSongs = [...songs];
-                newSongs.splice(currentAudioIndex, 1);
-                setSongsArr([songs[currentAudioIndex], ...createRandomArray(newSongs)]);
+                let mixSongs = [...songs];
+                const currentSong = mixSongs.splice(currentAudioIndex, 1)[0];
+                mixSongs = createRandomArray(mixSongs);
+                mixSongs.splice(currentAudioIndex, 0, currentSong);
+                setSongsArr(mixSongs);
+                console.log(mixSongs);
                 break;
             case 'favorite':
-                setSongsArr(songs.filter(song => song.favorite));
+                const favoriteSongs = songs.filter(song => song.favorite);
+                if(favoriteSongs.length === 0){
+                   setSongsType('list');
+                } else{
+                    setSongsArr(favoriteSongs);
+                    changeAudioIndex(0);
+                }
                 break;
             default:
                 break;
