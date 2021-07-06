@@ -6,6 +6,7 @@ import PlayerButtons from './PlayerButtons';
 
 const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, songsType, setSongsType }) => {
     const [songsArr, setSongsArr] = React.useState(null);
+    const [prevSongsType, setPrevSongsType] = React.useState(null);
 
     React.useEffect(() => {
         changeSongsArray();
@@ -19,11 +20,23 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
         changeSongsArray();
     }, [songsType]);
 
+    const setSongIndex = songId => {
+        songs.forEach((song, index) => {
+            if(song.id === songId) changeAudioIndex(index);
+        });
+    }
+
     const changeSongsArray = () => {
         switch(songsType){
             case 'list':
+                if(prevSongsType === 'favorite'){
+                    const favoriteSongId = songsArr[0].id;
+                    setSongIndex(favoriteSongId);
+                }else if(prevSongsType === 'mix'){
+                    const mixSongId = songsArr[currentAudioIndex].id;
+                    setSongIndex(mixSongId);
+                }
                 setSongsArr(songs);
-                changeAudioIndex(0);
                 break;
             case 'mix':
                 let mixSongs = [...songs];
@@ -31,7 +44,6 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
                 mixSongs = createRandomArray(mixSongs);
                 mixSongs.splice(currentAudioIndex, 0, currentSong);
                 setSongsArr(mixSongs);
-                console.log(mixSongs);
                 break;
             case 'favorite':
                 const favoriteSongs = songs.filter(song => song.favorite);
@@ -66,6 +78,11 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
         return newArr;
     }
 
+    const changeSongsType = newType => {
+        setPrevSongsType(songsType);
+        setSongsType(newType);
+    }
+
     return (
         <div className='audio'>
             <div className="audio__content">
@@ -77,7 +94,7 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
                 />}
                 <PlayerButtons 
                     songsType={songsType}
-                    setSongsType={setSongsType}
+                    setSongsType={changeSongsType}
                     changeSongsArray={changeSongsArray}
                     isFavorite={songs.filter(song => song.favorite).length !== 0}
                 />

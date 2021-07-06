@@ -48,7 +48,7 @@ let initialState = {
         title: 'Я в моменте',
         img: songImg5,
         song: music5,
-        favorite: false,
+        favorite: true,
       },
     ]
 }
