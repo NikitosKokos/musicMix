@@ -2,7 +2,8 @@ import music from '../assets/audio/venus-jupiter.mp3';
 import music2 from '../assets/audio/end-of-the-road.mp3';
 import music3 from '../assets/audio/Grover-Washington-Jr-Just-The-Two-Of-Us.mp3';
 import music4 from '../assets/audio/city-under-the-sole.mp3';
-import music5 from '../assets/audio/Ya_v_momente.mp3'
+import music5 from '../assets/audio/Ya_v_momente.mp3';
+import music6 from '../assets/audio/follow-you.mp3';
 import songImg from '../assets/img/song/01.jpg';
 import songImg3 from '../assets/img/song/03.jpg';
 import songImg5 from '../assets/img/song/05.jpg';
@@ -49,6 +50,13 @@ let initialState = {
         img: songImg5,
         song: music5,
         favorite: true,
+      },
+      {
+        id: 6,
+        title: 'Follow You',
+        img: null,
+        song: music6,
+        favorite: false,
       },
     ]
 }

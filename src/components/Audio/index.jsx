@@ -20,8 +20,8 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
         changeSongsArray();
     }, [songsType]);
 
-    const setSongIndex = songId => {
-        songs.forEach((song, index) => {
+    const setSongIndex = (songId, arr = songs) => {
+        arr.forEach((song, index) => {
             if(song.id === songId) changeAudioIndex(index);
         });
     }
@@ -29,20 +29,37 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
     const changeSongsArray = () => {
         switch(songsType){
             case 'list':
-                if(prevSongsType === 'favorite'){
-                    const favoriteSongId = songsArr[0].id;
-                    setSongIndex(favoriteSongId);
-                }else if(prevSongsType === 'mix'){
-                    const mixSongId = songsArr[currentAudioIndex].id;
-                    setSongIndex(mixSongId);
+                switch(prevSongsType){
+                    case 'favorite':
+                        const favoriteSongId = songsArr[currentAudioIndex].id;
+                        setSongIndex(favoriteSongId);
+                        break;
+                    case 'mix':
+                        const mixSongId = songsArr[currentAudioIndex].id;
+                        setSongIndex(mixSongId);
+                        break;
+                    default:
+                        break;
                 }
                 setSongsArr(songs);
                 break;
             case 'mix':
                 let mixSongs = [...songs];
-                const currentSong = mixSongs.splice(currentAudioIndex, 1)[0];
-                mixSongs = createRandomArray(mixSongs);
-                mixSongs.splice(currentAudioIndex, 0, currentSong);
+
+                switch(prevSongsType){
+                    case 'list':
+                        const currentSong = mixSongs.splice(currentAudioIndex, 1)[0];
+                        mixSongs = createRandomArray(mixSongs);
+                        mixSongs.splice(currentAudioIndex, 0, currentSong);
+                        break;
+                    case 'favorite':
+                        const favoriteSongId = songsArr[currentAudioIndex].id;
+                        mixSongs = createRandomArray(mixSongs);
+                        setSongIndex(favoriteSongId, mixSongs);
+                        break;
+                    default:
+                        break;
+                }
                 setSongsArr(mixSongs);
                 break;
             case 'favorite':
@@ -50,8 +67,14 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
                 if(favoriteSongs.length === 0){
                    setSongsType('list');
                 } else{
+                    const songId = songsArr[currentAudioIndex].id;
+                    const favoriteSong = favoriteSongs.filter(song => song.id === songId)[0];
+                    if(favoriteSong){
+                        setSongIndex(favoriteSong.id, favoriteSongs);
+                    }else{
+                        changeAudioIndex(0);
+                    }
                     setSongsArr(favoriteSongs);
-                    changeAudioIndex(0);
                 }
                 break;
             default:

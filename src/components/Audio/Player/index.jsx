@@ -20,9 +20,9 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
         startFormattingTimeInterval();
         return () => {
             clearFormattingTimeInterval();
-            if(timeInterval) clearTimeInterval();
+            if(isPlay) clearTimeInterval();
         }
-    }, []);
+    }, [timeInterval]);
 
     const formattingTime = (currentTime) => {
         const minutes = Math.floor(currentTime / 60);
@@ -32,6 +32,7 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
     }
 
     const onChangeAudio = (action) => {
+        if(isPlay) clearTimeInterval();
         setIsInitializedAudio(false);
         switch(action){
             case 'next':
@@ -62,10 +63,12 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
     }
 
     const onEnded = () => {
-        if((Math.floor(audioRef.current.currentTime) === Math.floor(audioRef.current.duration)) && isPlay){
+        if((Math.floor(audioRef.current.currentTime) === Math.floor(audioRef.current.duration)) && isPlay && songs.length > 1){
             setTimeout(() => {
                 onChangeAudio('next');
             }, 1000);
+        }else{
+            setIsPlay(false);
         }
     }
 
@@ -80,7 +83,6 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
     }
 
     const clearTimeInterval = () => {
-        debugger;
         clearInterval(timeInterval);
     }
 
@@ -89,9 +91,7 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
     }
 
     const startTimeInterval = () => {
-        debugger;
         setTimeInterval(setInterval(() => {
-            console.log(timeInterval);
             setAudioStart(audioRef.current.currentTime);
         }, 100));
     }
