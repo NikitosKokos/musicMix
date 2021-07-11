@@ -13,7 +13,6 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
     const [isPlay, setIsPlay] = React.useState(false);
     const [isInitializedAudio, setIsInitializedAudio] = React.useState(false);
     const [timeInterval, setTimeInterval] = React.useState(null);
-    // let timeInterval;
     let formattingTimeInterval;
 
     React.useEffect(() => {
@@ -63,7 +62,7 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
     }
 
     const onEnded = () => {
-        if((Math.floor(audioRef.current.currentTime) === Math.floor(audioRef.current.duration)) && isPlay && songs.length > 1){
+        if(isPlay && songs.length > 1){
             setTimeout(() => {
                 onChangeAudio('next');
             }, 1000);

@@ -4,8 +4,7 @@ import './style.scss';
 import Player from './Player';
 import PlayerButtons from './PlayerButtons';
 
-const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, songsType, setSongsType }) => {
-    const [songsArr, setSongsArr] = React.useState(null);
+const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, songsType, setSongsType, songsArr, setSongsArr }) => {
     const [prevSongsType, setPrevSongsType] = React.useState(null);
 
     React.useEffect(() => {
@@ -42,8 +41,10 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
                         break;
                 }
                 setSongsArr(songs);
-                break;
+                return;
             case 'mix':
+                if(!prevSongsType) return;
+
                 let mixSongs = [...songs];
 
                 switch(prevSongsType){
@@ -61,11 +62,11 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
                         break;
                 }
                 setSongsArr(mixSongs);
-                break;
+                return;
             case 'favorite':
                 const favoriteSongs = songs.filter(song => song.favorite);
                 if(favoriteSongs.length === 0){
-                   setSongsType('list');
+                    changeSongsType('list');
                 } else{
                     const songId = songsArr[currentAudioIndex].id;
                     const favoriteSong = favoriteSongs.filter(song => song.id === songId)[0];
@@ -76,9 +77,9 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
                     }
                     setSongsArr(favoriteSongs);
                 }
-                break;
+                return;
             default:
-                break;
+                return;
         }
     }
 

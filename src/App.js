@@ -10,6 +10,7 @@ import {
 import Add from "./components/Add";
 import NotFound from "./components/NotFound";
 import ListContainer from "./components/List/ListContainer";
+import FavoritesContainer from "./components/Favorites/FavoritesContainer";
 
 function App() {
 
@@ -20,13 +21,16 @@ function App() {
           <Header />
           <Switch>
             <Route exact path='/'>
-                <AudioContainer />
+              <AudioContainer />
             </Route>
             <Route path='/list'>
-                <ListContainer />
+              <ListContainer />
             </Route>
             <Route path='/add'>
-                <Add />
+              <Add />
+            </Route>
+            <Route path='/favorites'>
+              <FavoritesContainer />
             </Route>
             <Route>
               <NotFound />

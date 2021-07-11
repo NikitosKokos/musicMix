@@ -12,7 +12,15 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite }) => {
     const [isPlay, setIsPlay] = React.useState(false);
     const [isInitializedAudio, setIsInitializedAudio] = React.useState(false);
     const [timeInterval, setTimeInterval] = React.useState(null);
-    const [formattingTimeInterval, setFormattingTimeInterval] = React.useState(null);
+    let formattingTimeInterval;
+
+    React.useEffect(() => {
+        startFormattingTimeInterval();
+        return () => {
+            clearFormattingTimeInterval();
+            if(isPlay) clearTimeInterval();
+        }
+    }, [timeInterval]);
 
     const formattingTime = (currentTime) => {
         const minutes = Math.floor(currentTime / 60);
@@ -25,9 +33,12 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite }) => {
         setFormattingDuration(formattingTime(audioRef.current.duration));
         setDuration(Math.floor(audioRef.current.duration));
         setAudioStart(Math.round(audioRef.current.currentTime));
-        startFormattingTimeInterval();
         setIsInitializedAudio(true);
-        if(isPlay) play();
+    }
+
+    const onEnded = () => {
+        setIsPlay(false);
+        clearTimeInterval();
     }
 
     const play = () => {
@@ -44,6 +55,10 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite }) => {
         clearInterval(timeInterval);
     }
 
+    const clearFormattingTimeInterval = () => {
+        clearInterval(formattingTimeInterval);
+    }
+
     const startTimeInterval = () => {
         setTimeInterval(setInterval(() => {
             setAudioStart(audioRef.current.currentTime);
@@ -51,9 +66,9 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite }) => {
     }
 
     const startFormattingTimeInterval = () => {
-        setFormattingTimeInterval(setInterval(() => {
+        formattingTimeInterval = setInterval(() => {
             setCurrentFormattingTime(formattingTime(audioRef.current.currentTime));
-        }, 100));
+        }, 100);
     }
 
     const onChange = ([newTime]) => {
@@ -84,7 +99,7 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite }) => {
                 <div className="song__img"><img src={img ? img : defaultSongImage} alt="song" /></div>
                 <div className="song__body">
                     <div className="song__title">{title}</div>
-                    <audio className='song__player' src={song} onLoadedMetadata={onLoadedMetadata} ref={audioRef}></audio>
+                    <audio className='song__player' src={song} onEnded={onEnded} onLoadedMetadata={onLoadedMetadata} ref={audioRef}></audio>
                     {isInitializedAudio 
                     ? <div className="song__slider slider-player">
                         <div className="slider-player__time">{ currentFormattingTime }</div>

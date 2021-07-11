@@ -1,13 +1,12 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
-import List from ".";
 import { getSongs } from "../../redux/audio-selectors";
 import { changeFavorite } from '../../redux/audio-reducer';
+import Favorites from ".";
 
 
-const ListContainer = ({ songs, changeFavorite }) => (
-    <List
-        title='Music list'
+const FavoritesContainer = ({ songs, changeFavorite }) => (
+    <Favorites 
         songs={songs}
         changeFavorite={changeFavorite}
     />);
@@ -20,4 +19,4 @@ export default compose(
     connect(mapStateToProps, {
         changeFavorite
     })
-)(ListContainer);
+)(FavoritesContainer);

@@ -9,3 +9,7 @@ export const getSongs = (state) => {
 export const getSongsType = (state) => {
     return state.audio.songsType;
 }
+
+export const getSongsArr = (state) => {
+    return state.audio.songsArr;
+}

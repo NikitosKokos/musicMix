@@ -13,9 +13,17 @@
         font-weight: 700;
         color: #0B032D;
         margin: 0px 0px 20px 0px;
+        border-bottom: 1px solid #eee;
+        padding: 0px 0px 20px 0px;
     }
 
     &__body{
 
+    }
+
+    &__empty{
+        font-size: 20px;
+        font-weight: 500;
+        color: #aaa;
     }
 }
