@@ -97,7 +97,7 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
 
     const startFormattingTimeInterval = () => {
         formattingTimeInterval = setInterval(() => {
-            setCurrentFormattingTime(formattingTime(audioRef.current.currentTime));
+            if(audioRef.current) setCurrentFormattingTime(formattingTime(audioRef.current.currentTime));
         }, 100);
     }
 

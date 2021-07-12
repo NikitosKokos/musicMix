@@ -2,6 +2,8 @@
 
 .song{
     margin: 0px 0px 15px 0px;
+    position: relative;
+
     &__content{
         display: flex;
         align-items: center;
@@ -9,6 +11,10 @@
         box-shadow: 0px 3px 10px #eee;
         padding: 20px 10px;
         border-radius: 10px;
+
+        @media (max-width: 500px){
+            flex-wrap: wrap;
+        }
     }
 
     &__img{
@@ -17,10 +23,26 @@
         overflow: hidden;
         border-radius: 5px;
 
+        @media (max-width: 500px){
+            flex: 0 0 150px;
+            height: 150px;
+            margin: 0px auto 10px auto;
+        }
+
         img{
             width: 100%;
             height: 100%;
             object-fit: contain;
+        }
+    }
+
+    &__main{
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 500px){
+            flex: 0 0 100%;
         }
     }
 
@@ -30,6 +52,10 @@
         flex-direction: column;
         justify-content: center;
         padding: 0px 10px 0px 20px;
+
+        @media (max-width: 500px){
+            padding: 0px 10px 0px 0px;
+        }
     }
 
     &__title{
@@ -37,6 +63,10 @@
         font-weight: 500;
         color: #0B032D;
         margin: 0px 0px 20px 0px;
+
+        @media (max-width: 500px){
+            font-size: 18px;
+        }
     }
 
     &__buttons{
@@ -112,6 +142,19 @@
             svg{
                 width: auto;
                 height: 30px;
+            }
+
+            @media (max-width: 500px){
+                position: absolute;
+                top: 20px;
+                right: 10px;
+                width: 60px;
+                height: 60px;
+
+                svg{
+                    width: auto;
+                    height: 35px;
+                }
             }
         }
     }

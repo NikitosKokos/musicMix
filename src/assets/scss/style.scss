@@ -22,6 +22,19 @@
 	}
 }
 
+::-webkit-scrollbar{
+	width: 16px;
+}
+
+::-webkit-scrollbar-thumb{
+	background: #bbb;
+	border: 2px solid #fff;
+}
+
+::-webkit-scrollbar-track{
+	background: #fff;
+}
+
 .wrapper {
 	width: 100%;
 	min-height: 100%;
