@@ -1,12 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './style.scss';
 
 const Header = () => {
     const [searchValue, setSearchValue] = React.useState('');
+    const history = useHistory();
 
     const onSearchInputChange = (e) => {
         setSearchValue(e.target.value);
+    }
+
+    const searchSong = (e) => {
+        e.preventDefault();
+        if(searchValue){
+            history.push(`/find/${searchValue}`);
+        }
     }
 
     return (
@@ -14,7 +22,7 @@ const Header = () => {
             <div className="header__content container">
                 <div className="header__main">
                     <Link to='/' className="header__logo">Music Mix</Link>
-                    <div className="header__search">
+                    <form onSubmit={searchSong} className="header__search">
                         <input 
                             className="header__input"
                             type="text"
@@ -28,7 +36,7 @@ const Header = () => {
                         <rect x="105.287" y="158" width="25" height="148.898" rx="12.5" transform="rotate(45 105.287 158)" fill="#0B032D"/>
                         </svg>
                         </button>
-                    </div>
+                    </form>
                 </div>
                 <div className="header__buttons">
                     <Link to='/favorites' className="header__button header__button_heart">

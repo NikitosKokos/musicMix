@@ -6,7 +6,7 @@ import defaultSongImage from '../../../assets/img/defaultSongImage.jpg';
 const Song = ({song: { title, img, song, favorite, id }, changeFavorite }) => {
     const audioRef = React.useRef(null);
     const [audioStart, setAudioStart] = React.useState(0);
-    const [currentFormattingTime, setCurrentFormattingTime] = React.useState(0.00);
+    const [currentFormattingTime, setCurrentFormattingTime] = React.useState('0.00');
     const [duration, setDuration] = React.useState(null);
     const [formattingDuration, setFormattingDuration] = React.useState(null);
     const [isPlay, setIsPlay] = React.useState(false);

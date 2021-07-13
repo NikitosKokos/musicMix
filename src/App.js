@@ -11,6 +11,7 @@ import Add from "./components/Add";
 import NotFound from "./components/NotFound";
 import ListContainer from "./components/List/ListContainer";
 import FavoritesContainer from "./components/Favorites/FavoritesContainer";
+import FindContainer from "./components/Find/FindContainer";
 
 function App() {
 
@@ -31,6 +32,9 @@ function App() {
             </Route>
             <Route path='/favorites'>
               <FavoritesContainer />
+            </Route>
+            <Route exact path='/find/:text'>
+              <FindContainer />
             </Route>
             <Route>
               <NotFound />
