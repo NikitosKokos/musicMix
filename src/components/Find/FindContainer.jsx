@@ -24,8 +24,6 @@ const FindContainer = ({ songs, changeFavorite, match }) => {
         }
     });
 
-    console.log(findSongs);
-
     return <List
         title='Find list'
         songs={findSongs}

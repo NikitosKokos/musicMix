@@ -1,4 +1,4 @@
-<svg viewBox="0 0 270 281">
-<circle cx="170" cy="100" r="87.5" stroke="#0B032D" stroke-width="25"/>
-<rect x="105.287" y="158" width="25" height="148.898" rx="12.5" transform="rotate(45 105.287 158)" fill="#0B032D"/>
+<svg width="350" height="354" viewBox="0 0 350 354" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="224.787" cy="125" r="90" stroke="white" stroke-width="70"/>
+<rect width="70" height="200" rx="35" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 190.919 212.497)" fill="white"/>
 </svg>

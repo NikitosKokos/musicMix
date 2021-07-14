@@ -14,6 +14,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        position: relative;
     }
 
     &__main{
@@ -25,9 +26,13 @@
         font-size: 30px;
         color: #fff;
         font-weight: 700;
+
+        @media (max-width: $md4+px){
+            font-size: 26px;
+        }
     }
 
-    &__search{
+    &__form{
         position: relative;
         width: 200px;
         height: 35px;
@@ -37,6 +42,53 @@
         justify-content: center;
         align-items: center;
         margin: 0px 0px 0px 30px;
+
+        @media (max-width: $md3+px){
+            margin: 0px 0px 0px 0px;
+            flex: 1 1 auto;
+        }
+    }
+
+    &__close{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        svg{
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (min-width: $md3+px){
+           display: none;
+        }
+    }
+
+    &__search{
+        @media (max-width: $md3+px){
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #843B62;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            align-items: center;
+            transition: all .3s ease-in-out;
+
+            &.show{
+                opacity: 1;
+                visibility: visible;
+            }
+        }
     }
 
     &__input{
@@ -63,6 +115,10 @@
             &::placeholder{
                 color: #888;
             }
+        }
+
+        @media (max-width: $md3+px){
+            flex: 1 1 auto;
         }
     }
 
@@ -117,6 +173,12 @@
         position: relative;
         margin: 0px 5px 0px 0px;
 
+        @media (max-width: $md4+px){
+            width: 40px;
+            height: 40px;
+            margin: 0px 0px 0px 0px;
+        }
+
         &:last-child{
           margin: 0px 0px 0px 0px;
         }
@@ -142,11 +204,26 @@
             }
         }
 
-        &_heart{
+        svg{
+            width: auto;
+            height: 30px;
+        }
+
+        @media (max-width: $md4+px){
             svg{
                 width: auto;
-                height: 30px;
+                height: 25px;
             }
+        }
+
+        &_find{
+            @media (min-width: $md3+px){
+               display: none;
+            }
+        }
+
+        &_heart{
+         
         }
 
         &_list{
@@ -155,13 +232,17 @@
                 width: auto;
                 height: 25px;
             }
+
+            @media (max-width: $md4+px){
+                svg{
+                    width: auto;
+                    height: 20px;
+                }
+            }
         }
 
         &_add{
-            svg{
-                width: auto;
-                height: 30px;
-            }
+         
         }
     }
 }
