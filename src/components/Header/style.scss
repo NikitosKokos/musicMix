@@ -32,23 +32,6 @@
         }
     }
 
-    &__form{
-        position: relative;
-        width: 200px;
-        height: 35px;
-        border-radius: 18px;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0px 0px 0px 30px;
-
-        @media (max-width: $md3+px){
-            margin: 0px 0px 0px 0px;
-            flex: 1 1 auto;
-        }
-    }
-
     &__close{
         width: 50px;
         height: 50px;
@@ -64,6 +47,11 @@
 
         @media (min-width: $md3+px){
            display: none;
+        }
+
+        @media (max-width: $md4+px){
+           width: 40px;
+           height: 40px;
         }
     }
 
@@ -89,72 +77,14 @@
                 visibility: visible;
             }
         }
-    }
 
-    &__input{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: #fff;
-        padding: 0 30px 0 20px;
-        color: #0B032D;
-        font-weight: 500;
-        font-size: 18px;
-        transition: all .3s ease-in-out;
+        .search{
+            width: 200px;
+            margin: 0px 0px 0px 30px;
 
-        &::placeholder{
-            color: #aaa;
-            transition: all .3s ease-in-out;
-        }
-
-        &:focus{
-            background: #eee;
-
-            &::placeholder{
-                color: #888;
-            }
-        }
-
-        @media (max-width: $md3+px){
-            flex: 1 1 auto;
-        }
-    }
-
-    &__btn{
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 2px;
-        background: transparent;
-        box-shadow: none;
-        width: 30px;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        svg{
-            width: 15px;
-            height: 15px;
-
-            rect, circle{
-                transition: all .3s ease-in-out;
-            }
-        }
-
-        @media (min-width: $md2+px){
-            &:hover{
-                svg{
-                    circle{
-                        stroke: #FFAD32;
-                    }
-
-                    rect{
-                        fill: #FFAD32;
-                    }
-                }
+            @media (max-width: $md3+px){
+                margin: 0px 0px 0px 0px;
+                flex: 1 1 auto;
             }
         }
     }

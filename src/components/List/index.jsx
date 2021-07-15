@@ -1,12 +1,14 @@
 import React from 'react';
+import SearchInput from '../common/SearchInput';
 import Song from '../common/Song';
 import './style.scss'
 
-const List = ({ title, songs, changeFavorite }) => {
+const List = ({ title, songs, changeFavorite, isFind, searchInputValue }) => {
     return (
         <div className='list'>
             <div className="list__content">
                 <h1 className="list__title">{ title }</h1>
+                {isFind && <SearchInput searchInputValue={searchInputValue} />}
                 { songs.length !== 0
                 ? <div className="list__body">    
                     {songs.map(song => <Song key={song.id} song={song} changeFavorite={changeFavorite} />)}

@@ -28,6 +28,8 @@ const FindContainer = ({ songs, changeFavorite, match }) => {
         title='Find list'
         songs={findSongs}
         changeFavorite={changeFavorite}
+        isFind
+        searchInputValue={match.params.text}
     />};
 
 const mapStateToProps = (state) => ({

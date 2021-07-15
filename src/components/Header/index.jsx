@@ -1,23 +1,10 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import SearchInput from '../common/SearchInput';
 import './style.scss';
 
 const Header = () => {
-    const [searchValue, setSearchValue] = React.useState('');
     const formRef = React.useRef(null);
-    const history = useHistory();
-
-    const onSearchInputChange = (e) => {
-        setSearchValue(e.target.value);
-    }
-
-    const searchSong = (e) => {
-        e.preventDefault();
-        if(searchValue){
-            history.push(`/find/${searchValue}`);
-            hideSearch();
-        }
-    }
 
     const showSearch = () => {
         formRef.current.classList.add('show');
@@ -33,21 +20,7 @@ const Header = () => {
                 <div className="header__main">
                     <Link to='/' className="header__logo">Music Mix</Link>
                     <div ref={formRef} className="header__search">
-                        <form onSubmit={searchSong} className="header__form">
-                            <input 
-                                className="header__input"
-                                type="text"
-                                placeholder='Search music'
-                                value={searchValue}
-                                onChange={onSearchInputChange}
-                            />
-                            <button className="header__btn">
-                            <svg viewBox="0 0 270 281">
-                            <circle cx="170" cy="100" r="87.5" fill='none' stroke="#0B032D" strokeWidth="25"/>
-                            <rect x="105.287" y="158" width="25" height="148.898" rx="12.5" transform="rotate(45 105.287 158)" fill="#0B032D"/>
-                            </svg>
-                            </button>
-                        </form>
+                        <SearchInput hideSearch={hideSearch} />
                         <div className="header__close"  onClick={hideSearch}>
                             <svg viewBox="0 0 426 426" fill="none">
                             <g clipPath="url(#clip0)">
