@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { getSongs } from "../../redux/audio-selectors";
-import { changeFavorite } from '../../redux/audio-reducer';
+import { getSongs, getIsPlayId } from "../../redux/audio-selectors";
+import { changeFavorite, setIsPlayId } from '../../redux/audio-reducer';
 import { withRouter } from "react-router-dom";
 import List from "../List";
 
 
-const FindContainer = ({ songs, changeFavorite, match }) => {
+const FindContainer = ({ songs, changeFavorite, match, isPlayId, setIsPlayId }) => {
     const text = match.params.text.toLowerCase().split('');
     const findSongs = songs.filter(song => {
         const songTitle = song.title.toLowerCase().split('');
@@ -30,15 +30,19 @@ const FindContainer = ({ songs, changeFavorite, match }) => {
         changeFavorite={changeFavorite}
         isFind
         searchInputValue={match.params.text}
+        isPlayId={isPlayId}
+        setIsPlayId={setIsPlayId}
     />};
 
 const mapStateToProps = (state) => ({
     songs: getSongs(state),
+    isPlayId: getIsPlayId(state),
 })
 
 export default compose(
     connect(mapStateToProps, {
-        changeFavorite
+        changeFavorite,
+        setIsPlayId
     }),
     withRouter
 )(FindContainer);

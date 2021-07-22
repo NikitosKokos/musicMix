@@ -13,3 +13,7 @@ export const getSongsType = (state) => {
 export const getSongsArr = (state) => {
     return state.audio.songsArr;
 }
+
+export const getIsPlayId = (state) => {
+    return state.audio.isPlayId;
+}

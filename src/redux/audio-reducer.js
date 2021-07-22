@@ -4,6 +4,9 @@ import music3 from '../assets/audio/Grover-Washington-Jr-Just-The-Two-Of-Us.mp3'
 import music4 from '../assets/audio/city-under-the-sole.mp3';
 import music5 from '../assets/audio/Ya_v_momente.mp3';
 import music6 from '../assets/audio/follow-you.mp3';
+import music7 from '../assets/audio/good-thing.mp3';
+import music8 from '../assets/audio/Numb.mp3';
+
 import songImg from '../assets/img/song/01.jpg';
 import songImg3 from '../assets/img/song/03.jpg';
 import songImg5 from '../assets/img/song/05.jpg';
@@ -12,6 +15,7 @@ const SET_CURRENT_AUDIO_INDEX = 'audio/SET_CURRENT_AUDIO_INDEX';
 const CHANGE_FAVORITE = 'audio/CHANGE_FAVORITE';
 const SET_SONGS_TYPE = 'audio/SET_SONGS_TYPE';
 const SET_SONGS_ARR = 'audio/SET_SONGS_ARR';
+const SET_IS_PLAY_ID = 'audio/SET_IS_PLAY_ID';
 
 let initialState = {
     currentAudioIndex: 0,
@@ -59,8 +63,23 @@ let initialState = {
         song: music6,
         favorite: false,
       },
+      {
+        id: 7,
+        title: 'Good Thing',
+        img: null,
+        song: music7,
+        favorite: false,
+      },
+      {
+        id: 8,
+        title: 'Numb',
+        img: null,
+        song: music8,
+        favorite: true,
+      },
     ],
     songsArr: null,
+    isPlayId: null,
 }
 
 const audioReducer = (state = initialState, action) => {
@@ -88,6 +107,11 @@ const audioReducer = (state = initialState, action) => {
             ...state,
             songsArr: action.payload
           }
+        case SET_IS_PLAY_ID:
+          return {
+            ...state,
+            isPlayId: action.payload
+          }
         default:
             return state;
     }
@@ -97,5 +121,6 @@ export const setCurrentAudioIndex = (payload) => ({ type: SET_CURRENT_AUDIO_INDE
 export const changeFavorite = (id, favorite) => ({ type: CHANGE_FAVORITE, id, favorite });
 export const setSongsType = (payload) => ({ type: SET_SONGS_TYPE, payload });
 export const setSongsArr = (payload) => ({ type: SET_SONGS_ARR, payload });
+export const setIsPlayId = (payload) => ({ type: SET_IS_PLAY_ID, payload });
 
 export default audioReducer;

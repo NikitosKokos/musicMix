@@ -3,13 +3,13 @@ import React from 'react';
 import './style.scss'
 import defaultSongImage from '../../../assets/img/defaultSongImage.jpg';
 
-const Song = ({song: { title, img, song, favorite, id }, changeFavorite }) => {
+const Song = ({song: { title, img, song, favorite, id }, changeFavorite, isPlayId, setIsPlayId }) => {
     const audioRef = React.useRef(null);
     const [audioStart, setAudioStart] = React.useState(0);
     const [currentFormattingTime, setCurrentFormattingTime] = React.useState('0.00');
     const [duration, setDuration] = React.useState(null);
     const [formattingDuration, setFormattingDuration] = React.useState(null);
-    const [isPlay, setIsPlay] = React.useState(false);
+    const isPlay = isPlayId === id;
     const [isInitializedAudio, setIsInitializedAudio] = React.useState(false);
     const [timeInterval, setTimeInterval] = React.useState(null);
     let formattingTimeInterval;
@@ -21,6 +21,16 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite }) => {
             if(isPlay) clearTimeInterval();
         }
     }, [timeInterval]);
+
+    React.useEffect(() => {
+        if(!isPlay) pause();
+    }, [isPlayId]);
+
+    React.useEffect(() => {
+        return () => {
+            setIsPlayId(null);
+        }
+    }, []);
 
     const formattingTime = (currentTime) => {
         const minutes = Math.floor(currentTime / 60);
@@ -37,7 +47,7 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite }) => {
     }
 
     const onEnded = () => {
-        setIsPlay(false);
+        setIsPlayId(null);
         clearTimeInterval();
     }
 
@@ -81,12 +91,12 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite }) => {
 
     const onPlay = () => {
         play();
-        setIsPlay(true);
+        setIsPlayId(id);
     }
 
     const onPause = () => {
         pause();
-        setIsPlay(false);
+        setIsPlayId(null);
     }
 
     const onFavoriteChange = () => {
