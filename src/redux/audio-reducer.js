@@ -10,6 +10,7 @@ import music8 from '../assets/audio/Numb.mp3';
 import songImg from '../assets/img/song/01.jpg';
 import songImg3 from '../assets/img/song/03.jpg';
 import songImg5 from '../assets/img/song/05.jpg';
+import songImg8 from '../assets/img/song/08.jpg';
 
 const SET_CURRENT_AUDIO_INDEX = 'audio/SET_CURRENT_AUDIO_INDEX';
 const CHANGE_FAVORITE = 'audio/CHANGE_FAVORITE';
@@ -73,7 +74,7 @@ let initialState = {
       {
         id: 8,
         title: 'Numb',
-        img: null,
+        img: songImg8,
         song: music8,
         favorite: true,
       },

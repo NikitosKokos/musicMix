@@ -99,7 +99,7 @@
 
         @media (max-width: $md4+px){
            border-radius: 15px;
-           padding: 165px 10px 20px 10px;
+           padding: 155px 10px 20px 10px;
         }
     }
 
@@ -136,6 +136,7 @@
         @media (max-width: $md4+px){
             width: 200px;
             height: 200px;
+            transform: translate(-50%, -60px);
         }
 
         img{

@@ -28,7 +28,7 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite, isPlayI
 
     React.useEffect(() => {
         return () => {
-            setIsPlayId(null);
+            if(isPlay) setIsPlayId(null);
         }
     }, []);
 
