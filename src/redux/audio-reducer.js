@@ -6,11 +6,14 @@ import music5 from '../assets/audio/Ya_v_momente.mp3';
 import music6 from '../assets/audio/follow-you.mp3';
 import music7 from '../assets/audio/good-thing.mp3';
 import music8 from '../assets/audio/Numb.mp3';
+import music9 from '../assets/audio/never-ganna-give-you-up.mp3';
+import music10 from '../assets/audio/blinding-lights.mp3';
 
 import songImg from '../assets/img/song/01.jpg';
 import songImg3 from '../assets/img/song/03.jpg';
 import songImg5 from '../assets/img/song/05.jpg';
 import songImg8 from '../assets/img/song/08.jpg';
+import songImg9 from '../assets/img/song/09.jpg';
 
 const SET_CURRENT_AUDIO_INDEX = 'audio/SET_CURRENT_AUDIO_INDEX';
 const CHANGE_FAVORITE = 'audio/CHANGE_FAVORITE';
@@ -76,6 +79,20 @@ let initialState = {
         title: 'Numb',
         img: songImg8,
         song: music8,
+        favorite: true,
+      },
+      {
+        id: 9,
+        title: 'Never Gonna Give You Up',
+        img: songImg9,
+        song: music9,
+        favorite: true,
+      },
+      {
+        id: 10,
+        title: 'Blinding Lights',
+        img: null,
+        song: music10,
         favorite: true,
       },
     ],

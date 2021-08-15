@@ -11,6 +11,7 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite, isPlayI
     const [formattingDuration, setFormattingDuration] = React.useState(null);
     const isPlay = isPlayId === id;
     const [isInitializedAudio, setIsInitializedAudio] = React.useState(false);
+    const [isInitializedImg, setIsInitializedImg] = React.useState(false);
     const [timeInterval, setTimeInterval] = React.useState(null);
     let formattingTimeInterval;
 
@@ -44,6 +45,10 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite, isPlayI
         setDuration(Math.floor(audioRef.current.duration));
         setAudioStart(Math.round(audioRef.current.currentTime));
         setIsInitializedAudio(true);
+    }
+    
+    const onLoadImg = () => {
+        setIsInitializedImg(true);
     }
 
     const onEnded = () => {
@@ -106,7 +111,7 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite, isPlayI
     return (
         <div className='song'>
             <div className="song__content">
-                <div className="song__img"><img src={img ? img : defaultSongImage} alt="song" /></div>
+                <div className={`song__img ${!isInitializedImg ? 'song__img_loading' : ''}`}><img onLoad={onLoadImg} src={img ? img : defaultSongImage} alt="song" /></div>
                 <div className="song__main">
                     <div className="song__body">
                         <div className="song__title">{title}</div>

@@ -12,6 +12,7 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
     const [formattingDuration, setFormattingDuration] = React.useState(null);
     const [isPlay, setIsPlay] = React.useState(false);
     const [isInitializedAudio, setIsInitializedAudio] = React.useState(false);
+    const [isInitializedImg, setIsInitializedImg] = React.useState(false);
     const [timeInterval, setTimeInterval] = React.useState(null);
     let formattingTimeInterval;
 
@@ -33,6 +34,7 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
     const onChangeAudio = (action) => {
         if(isPlay) clearTimeInterval();
         setIsInitializedAudio(false);
+        setIsInitializedImg(false);
         switch(action){
             case 'next':
                 if(currentAudioIndex === (songs.length - 1)){
@@ -59,6 +61,10 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
         setAudioStart(Math.round(audioRef.current.currentTime));
         setIsInitializedAudio(true);
         if(isPlay) play();
+    }
+
+    const onLoadImg = () => {
+        setIsInitializedImg(true);
     }
 
     const onEnded = () => {
@@ -123,14 +129,6 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
         changeFavorite(id, !favorite);
     }
 
-    // const ChangeVolume = (action) => {
-    //     if(action === 'plus' && audioRef.current.volume < 1){
-    //         audioRef.current.volume = Number((audioRef.current.volume + 0.1).toFixed(1))
-    //     }else if(action === 'minus' && audioRef.current.volume > 0){
-    //         audioRef.current.volume = Number((audioRef.current.volume - 0.1).toFixed(1))
-    //     }
-    // }
-
     return (
     <div className='player'>
         <div className="player__content">
@@ -142,7 +140,7 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite }) 
                     </svg>
                 </button>
             </div>
-            <div className="player__img"><img src={img ? img : defaultSongImage} alt="song" /></div>
+            <div className={`player__img ${!isInitializedImg ? 'player__img_loading' : ''}`}><img onLoad={onLoadImg} src={img ? img : defaultSongImage} alt="song" /></div>
             <h3 className="player__title">{ title }</h3>
             <audio className='player__player' src={song} onEnded={onEnded} onLoadedMetadata={onLoadedMetadata} ref={audioRef}></audio>
             {isInitializedAudio
