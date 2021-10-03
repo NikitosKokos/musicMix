@@ -8,6 +8,8 @@ import music7 from '../assets/audio/good-thing.mp3';
 import music8 from '../assets/audio/Numb.mp3';
 import music9 from '../assets/audio/never-ganna-give-you-up.mp3';
 import music10 from '../assets/audio/blinding-lights.mp3';
+import music11 from '../assets/audio/let-her-go.mp3';
+import music12 from '../assets/audio/bad-habits.mp3';
 
 import songImg from '../assets/img/song/01.jpg';
 import songImg3 from '../assets/img/song/03.jpg';
@@ -86,7 +88,7 @@ let initialState = {
         title: 'Never Gonna Give You Up',
         img: songImg9,
         song: music9,
-        favorite: true,
+        favorite: false,
       },
       {
         id: 10,
@@ -94,6 +96,20 @@ let initialState = {
         img: null,
         song: music10,
         favorite: true,
+      },
+      {
+        id: 11,
+        title: 'Let Her Go',
+        img: null,
+        song: music11,
+        favorite: true,
+      },
+      {
+        id: 12,
+        title: 'Bad Habits',
+        img: null,
+        song: music12,
+        favorite: false,
       },
     ],
     songsArr: null,
