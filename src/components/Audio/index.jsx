@@ -4,94 +4,32 @@ import './style.scss';
 import Player from './Player';
 import PlayerButtons from './PlayerButtons';
 
-const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, songsType, setSongsType, songsArr, setSongsArr }) => {
+const Audio = ({
+    currentAudioIndex,
+    songs,
+    changeAudioIndex,
+    changeFavorite,
+    songsType,
+    setSongsType,
+    songsArr,
+    setSongsArr,
+}) => {
     const [prevSongsType, setPrevSongsType] = React.useState(null);
     const [audioCurrent, setAudioCurrent] = React.useState(null);
+    const [isStartPlayAudio, setIsStartPlayAudio] = React.useState(false);
     const canvasRef = React.useRef();
+    let audioCtx,
+        canvas,
+        analyser,
+        dataArray,
+        bufferLength,
+        width,
+        height,
+        canvasContext;
 
     React.useEffect(() => {
         changeSongsArray();
     }, []);
-
-    React.useEffect(() => {
-
-        // -------
-
-        //построить эквалайзер с несколькими фильтрами
-        const audioCtx = window.AudioContext || window.webkitAudioContext;
-        const canvas = canvasRef.current;
-        let analyser;
-
-        let dataArray, bufferLength;
-        const audioContext = new audioCtx();
-        const width = canvas.width;
-        const height = canvas.height;
-        const canvasContext = canvas.getContext('2d');
-        if (!!audioCurrent){
-            buildAudioGraph();
-            requestAnimationFrame(visualize);
-        } 
-
-        function buildAudioGraph() {
-            // var mediaElement = document.getElementById('player');
-            // mediaElement.onplay = (e) => {
-            //     audioContext.resume();
-            // };
-
-            // исправлено для политики автозапуска
-            audioCurrent.addEventListener('play', () => audioContext.resume());
-
-            const sourceNode = audioContext.createMediaElementSource(audioCurrent);
-
-            // Создать узел анализатора
-            analyser = audioContext.createAnalyser();
-
-            // Попробуйте изменить на более низкие значения: 512, 256, 128, 64 ...
-            analyser.fftSize = 128;
-            bufferLength = analyser.frequencyBinCount;
-            dataArray = new Uint8Array(bufferLength);
-
-            sourceNode.connect(analyser);
-            analyser.connect(audioContext.destination);
-        }
-
-        function visualize() {
-            // очистить canvas
-            canvasContext.clearRect(0, 0, width, height);
-
-            // Или используйте заливку RGBA, чтобы получить небольшой эффект размытия
-            //canvasContext.fillStyle = 'rgba (0, 0, 0, 0.5)';
-            //canvasContext.fillRect(0, 0, width, height);
-
-            // Получить данные анализатора
-            analyser.getByteFrequencyData(dataArray);
-
-            var barWidth = width / bufferLength;
-            var barHeight;
-            var x = 0;
-
-            // значения изменяются от 0 до 256, а высота холста равна 100. Давайте изменим масштаб
-            // перед отрисовкой. Это масштабный коэффициент
-            // let heightScale = height / 128;
-            let heightScale = height / 200;
-
-            for (var i = 0; i < bufferLength; i++) {
-                barHeight = dataArray[i];
-
-                // canvasContext.fillStyle = 'rgb(' + (barHeight + 0) + ',4,160)';
-                canvasContext.fillStyle = `rgb(${barHeight + 0 > 132 ? 132 : barHeight + 0}, 59, 98)`;
-                barHeight *= heightScale;
-                canvasContext.fillRect(x, height - barHeight / 2, barWidth, barHeight / 2);
-
-                // 2 - количество пикселей между столбцами
-                x += barWidth + 2;
-            }
-
-            // вызовите снова функцию визуализации со скоростью 60 кадров / с
-            requestAnimationFrame(visualize);
-        }
-        // -------
-    }, [audioCurrent]);
 
     React.useEffect(() => {
         if (songsType === 'favorite') changeSongsArray();
@@ -100,6 +38,89 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
     React.useEffect(() => {
         changeSongsArray();
     }, [songsType]);
+
+    function buildAudioGraph() {
+        canvas = canvasRef.current;
+        width = canvas.width;
+        height = canvas.height;
+        canvasContext = canvas.getContext('2d');
+        audioCtx = window.AudioContext || window.webkitAudioContext;
+
+        const audioContext = new audioCtx();
+        // исправлено для политики автозапуска
+        audioCurrent.addEventListener('play', () => audioContext.resume());
+
+        const sourceNode = audioContext.createMediaElementSource(audioCurrent);
+
+        // Создать узел анализатора
+        analyser = audioContext.createAnalyser();
+
+        // Попробуйте изменить на более низкие значения: 512, 256, 128, 64 ...
+        
+        if(document.documentElement.clientWidth <= 600){
+            analyser.fftSize = 32;
+        }else if(document.documentElement.clientWidth <= 992){
+            analyser.fftSize = 64;
+        }else{
+            analyser.fftSize = 128;
+        }
+        bufferLength = analyser.frequencyBinCount;
+        dataArray = new Uint8Array(bufferLength);
+
+        sourceNode.connect(analyser);
+        analyser.connect(audioContext.destination);
+    }
+
+    function visualize() {
+        // очистить canvas
+        canvasContext.clearRect(0, 0, width, height);
+
+        // Или используйте заливку RGBA, чтобы получить небольшой эффект размытия
+        //canvasContext.fillStyle = 'rgba (0, 0, 0, 0.5)';
+        //canvasContext.fillRect(0, 0, width, height);
+
+        // Получить данные анализатора
+        analyser.getByteFrequencyData(dataArray);
+
+        let barWidth = width / bufferLength;
+        let barHeight;
+        let x = 0;
+
+        // значения изменяются от 0 до 256, а высота холста равна 100. Давайте изменим масштаб
+        // перед отрисовкой. Это масштабный коэффициент
+        // let heightScale = height / 128;
+        let heightScale;
+        if(document.documentElement.clientWidth <= 600){
+            heightScale = height / 170;
+        }else{
+            heightScale = height / 200;
+        }
+
+        for (let i = 0; i < bufferLength; i++) {
+            barHeight = dataArray[i];
+
+            // canvasContext.fillStyle = 'rgb(' + (barHeight + 0) + ',4,160)';
+            canvasContext.fillStyle = `rgba(${
+                barHeight + 0 > 132 ? 132 : barHeight + 0
+            }, 59, 98, .5)`;
+            barHeight *= heightScale;
+            canvasContext.fillRect(x, height - barHeight / 2, barWidth, barHeight / 2);
+
+            // 2 - количество пикселей между столбцами
+            x += barWidth + 2;
+        }
+
+        // вызовите снова функцию визуализации со скоростью 60 кадров / с
+        requestAnimationFrame(visualize);
+    }
+
+    const onPlayAudio = () => {
+        if (!!audioCurrent && !isStartPlayAudio) {
+            buildAudioGraph();
+            requestAnimationFrame(visualize);
+            setIsStartPlayAudio(true);
+        }
+    };
 
     const setSongIndex = (songId, arr = songs) => {
         arr.forEach((song, index) => {
@@ -202,6 +223,7 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
                         changeAudioIndex={changeAudioIndex}
                         changeFavorite={changeFavorite}
                         setAudioCurrent={setAudioCurrent}
+                        onPlayAudio={onPlayAudio}
                     />
                 )}
                 <PlayerButtons
@@ -213,6 +235,6 @@ const Audio = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, son
             </div>
         </div>
     );
-}
+};
 
 export default Audio;

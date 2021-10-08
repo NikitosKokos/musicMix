@@ -3,7 +3,7 @@ import '../style.scss';
 import defaultSongImage from '../../../assets/img/defaultSongImage.jpg';
 import Nouislider from "nouislider-react";
 
-const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, playContext, setAudioCurrent }) => {
+const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, setAudioCurrent, onPlayAudio }) => {
     const { title, img, song, favorite, id } = songs[currentAudioIndex];
     const audioRef = React.useRef();
     const imgRef = React.useRef();
@@ -30,6 +30,10 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, pl
             setIsInitializedImg(true);
         }
     }, [id]);
+
+    React.useEffect(() => {
+        setAudioCurrent(audioRef.current);
+    }, [])
 
     const formattingTime = (currentTime) => {
         const minutes = Math.floor(currentTime / 60);
@@ -68,7 +72,6 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, pl
         setAudioStart(Math.round(audioRef.current.currentTime));
         setIsInitializedAudio(true);
         if (isPlay) play();
-        setAudioCurrent(audioRef.current);
     };
 
     const onLoadImg = () => {
@@ -129,6 +132,7 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, pl
     const onPlay = () => {
         play();
         setIsPlay(true);
+        onPlayAudio();
     };
 
     const onPause = () => {
@@ -237,7 +241,10 @@ const Player = ({ currentAudioIndex, songs, changeAudioIndex, changeFavorite, pl
                             </svg>
                         </button>
                     ) : (
-                        <button className="player__btn" onClick={onPlay}>
+                        <button
+                            className="player__btn"
+                            onClick={onPlay}
+                            disabled={!isInitializedAudio}>
                             <svg viewBox="0 0 32 32">
                                 <title />
                                 <g>

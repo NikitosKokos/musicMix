@@ -29,7 +29,7 @@ const Song = ({song: { title, img, song, favorite, id }, changeFavorite, isPlayI
 
     React.useEffect(() => {
         return () => {
-            if(isPlay) setIsPlayId(null);
+            setIsPlayId(null);
         }
     }, []);
 
