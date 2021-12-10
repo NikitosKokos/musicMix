@@ -54,7 +54,6 @@ const Audio = ({
 
         // Создать узел анализатора
         analyser = audioContext.createAnalyser();
-
         // Попробуйте изменить на более низкие значения: 512, 256, 128, 64 ...
         
         if(document.documentElement.clientWidth <= 600){
@@ -64,6 +63,7 @@ const Audio = ({
         }else{
             analyser.fftSize = 128;
         }
+        
         bufferLength = analyser.frequencyBinCount;
         dataArray = new Uint8Array(bufferLength);
 
@@ -76,8 +76,6 @@ const Audio = ({
         canvasContext.clearRect(0, 0, width, height);
 
         // Или используйте заливку RGBA, чтобы получить небольшой эффект размытия
-        //canvasContext.fillStyle = 'rgba (0, 0, 0, 0.5)';
-        //canvasContext.fillRect(0, 0, width, height);
 
         // Получить данные анализатора
         analyser.getByteFrequencyData(dataArray);

@@ -57,7 +57,7 @@
 
             &:checked + svg{
                 path, circle, rect{
-                    fill: #FFAD32;
+                    fill: #ff88c3;
                 }
             }
         }
@@ -75,7 +75,7 @@
             border-radius: 50%;
         }
 
-        @media (min-width: $md2+px){
+        @media(any-hover: hover){
             &:hover{
                 &:before{
                     transform: scale(1);
@@ -150,7 +150,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #FFAD32;
+            background: #843B62;
             z-index: 2;
             opacity: 0;
             visibility: hidden;
@@ -256,7 +256,7 @@
             border-radius: 50%;
         }
 
-        @media (min-width: $md2+px){
+        @media(any-hover: hover){
             &:hover{
                 &:before{
                     transform: scale(1);
@@ -309,11 +309,11 @@
                 display: none;
             }
 
-            @media (min-width: $md2+px){
+            @media(any-hover: hover){
                 &:hover{
                     background: transparent;
                     svg path{
-                        fill: #FFAD32;
+                        fill: #843B62;
                     }
                 }
             }
@@ -409,7 +409,7 @@
     }
 
     .noUi-connect{
-        background: #FFAD32;
+        background: #843B62;
     }
 
     .noUi-handle{
@@ -418,7 +418,7 @@
         border-radius: 50%;
         border: none;
         box-shadow: none;
-        background: darken(#FFAD32, 10%);
+        background: darken(#843B62, 10%);
         right: -10px;
         top: -4.5px;
         cursor: grab;

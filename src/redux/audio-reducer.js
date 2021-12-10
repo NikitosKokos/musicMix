@@ -10,12 +10,14 @@ import music9 from '../assets/audio/never-ganna-give-you-up.mp3';
 import music10 from '../assets/audio/blinding-lights.mp3';
 import music11 from '../assets/audio/let-her-go.mp3';
 import music12 from '../assets/audio/bad-habits.mp3';
+import music13 from '../assets/audio/last-one-standing.mp3';
 
 import songImg from '../assets/img/song/01.jpg';
 import songImg3 from '../assets/img/song/03.jpg';
 import songImg5 from '../assets/img/song/05.jpg';
 import songImg8 from '../assets/img/song/08.jpg';
 import songImg9 from '../assets/img/song/09.jpg';
+import songImg13 from '../assets/img/song/13.png';
 
 const SET_CURRENT_AUDIO_INDEX = 'audio/SET_CURRENT_AUDIO_INDEX';
 const CHANGE_FAVORITE = 'audio/CHANGE_FAVORITE';
@@ -27,94 +29,101 @@ let initialState = {
     currentAudioIndex: 0,
     songsType: 'list',
     songs: [
-      {
-        id: 1,
-        title: 'Венера-Юпитер',
-        img: songImg,
-        song: music,
-        favorite: false,
-      },
-      {
-        id: 2,
-        title: 'End Of The Road',
-        img: null,
-        song: music2,
-        favorite: false,
-      },
-      {
-        id: 3,
-        title: 'Just The Two Of Us',
-        img: songImg3,
-        song: music3,
-        favorite: false,
-      },
-      {
-        id: 4,
-        title: 'Город под подошвой',
-        img: null,
-        song: music4,
-        favorite: false,
-      },
-      {
-        id: 5,
-        title: 'Я в моменте',
-        img: songImg5,
-        song: music5,
-        favorite: true,
-      },
-      {
-        id: 6,
-        title: 'Follow You',
-        img: null,
-        song: music6,
-        favorite: false,
-      },
-      {
-        id: 7,
-        title: 'Good Thing',
-        img: null,
-        song: music7,
-        favorite: false,
-      },
-      {
-        id: 8,
-        title: 'Numb',
-        img: songImg8,
-        song: music8,
-        favorite: true,
-      },
-      {
-        id: 9,
-        title: 'Never Gonna Give You Up',
-        img: songImg9,
-        song: music9,
-        favorite: false,
-      },
-      {
-        id: 10,
-        title: 'Blinding Lights',
-        img: null,
-        song: music10,
-        favorite: true,
-      },
-      {
-        id: 11,
-        title: 'Let Her Go',
-        img: null,
-        song: music11,
-        favorite: true,
-      },
-      {
-        id: 12,
-        title: 'Bad Habits',
-        img: null,
-        song: music12,
-        favorite: false,
-      },
+        {
+            id: 1,
+            title: 'Венера-Юпитер',
+            img: songImg,
+            song: music,
+            favorite: false,
+        },
+        {
+            id: 2,
+            title: 'End Of The Road',
+            img: null,
+            song: music2,
+            favorite: false,
+        },
+        {
+            id: 3,
+            title: 'Just The Two Of Us',
+            img: songImg3,
+            song: music3,
+            favorite: false,
+        },
+        {
+            id: 4,
+            title: 'Город под подошвой',
+            img: null,
+            song: music4,
+            favorite: false,
+        },
+        {
+            id: 5,
+            title: 'Я в моменте',
+            img: songImg5,
+            song: music5,
+            favorite: true,
+        },
+        {
+            id: 6,
+            title: 'Follow You',
+            img: null,
+            song: music6,
+            favorite: false,
+        },
+        {
+            id: 7,
+            title: 'Good Thing',
+            img: null,
+            song: music7,
+            favorite: false,
+        },
+        {
+            id: 8,
+            title: 'Numb',
+            img: songImg8,
+            song: music8,
+            favorite: true,
+        },
+        {
+            id: 9,
+            title: 'Never Gonna Give You Up',
+            img: songImg9,
+            song: music9,
+            favorite: false,
+        },
+        {
+            id: 10,
+            title: 'Blinding Lights',
+            img: null,
+            song: music10,
+            favorite: true,
+        },
+        {
+            id: 11,
+            title: 'Let Her Go',
+            img: null,
+            song: music11,
+            favorite: true,
+        },
+        {
+            id: 12,
+            title: 'Bad Habits',
+            img: null,
+            song: music12,
+            favorite: false,
+        },
+        {
+            id: 13,
+            title: 'Last One Standing',
+            img: songImg13,
+            song: music13,
+            favorite: false,
+        },
     ],
     songsArr: null,
     isPlayId: null,
-}
+};
 
 const audioReducer = (state = initialState, action) => {
     switch(action.type){

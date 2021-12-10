@@ -73,15 +73,15 @@
             }
         }
 
-        @media (min-width: $md2+px){
+        @media(any-hover: hover){
             &:hover{
                 svg{
                     circle{
-                        stroke: #FFAD32;
+                        stroke: #843B62;
                     }
 
                     rect{
-                        fill: #FFAD32;
+                        fill: #843B62;
                     }
                 }
             }

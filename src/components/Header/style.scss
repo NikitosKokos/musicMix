@@ -126,7 +126,7 @@
             border-radius: 50%;
         }
 
-        @media (min-width: $md2+px){
+        @media(any-hover: hover){
             &:hover{
                 &:before{
                     transform: scale(1);
