@@ -11,6 +11,7 @@ import music10 from '../assets/audio/blinding-lights.mp3';
 import music11 from '../assets/audio/let-her-go.mp3';
 import music12 from '../assets/audio/bad-habits.mp3';
 import music13 from '../assets/audio/last-one-standing.mp3';
+import music14 from '../assets/audio/life-goes-on.mp3';
 
 import songImg from '../assets/img/song/01.jpg';
 import songImg3 from '../assets/img/song/03.jpg';
@@ -18,6 +19,7 @@ import songImg5 from '../assets/img/song/05.jpg';
 import songImg8 from '../assets/img/song/08.jpg';
 import songImg9 from '../assets/img/song/09.jpg';
 import songImg13 from '../assets/img/song/13.png';
+import songImg14 from '../assets/img/song/14.png';
 
 const SET_CURRENT_AUDIO_INDEX = 'audio/SET_CURRENT_AUDIO_INDEX';
 const CHANGE_FAVORITE = 'audio/CHANGE_FAVORITE';
@@ -119,6 +121,13 @@ let initialState = {
             img: songImg13,
             song: music13,
             favorite: false,
+        },
+        {
+            id: 14,
+            title: 'Life Goes On',
+            img: songImg14,
+            song: music14,
+            favorite: true,
         },
     ],
     songsArr: null,
