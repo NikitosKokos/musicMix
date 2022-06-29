@@ -14,6 +14,8 @@ import music13 from '../assets/audio/last-one-standing.mp3';
 import music14 from '../assets/audio/life-goes-on.mp3';
 import music15 from '../assets/audio/dreidl.mp3';
 import music16 from '../assets/audio/arcade.mp3';
+import music17 from '../assets/audio/onerepublic-counting-stars.mp3';
+import music18 from '../assets/audio/imagine-dragons-sharks.mp3';
 
 import songImg from '../assets/img/song/01.jpg';
 import songImg3 from '../assets/img/song/03.jpg';
@@ -144,6 +146,20 @@ let initialState = {
             title: 'Arcade',
             img: null,
             song: music16,
+            favorite: false,
+        },
+        {
+            id: 17,
+            title: 'Counting Stars',
+            img: null,
+            song: music17,
+            favorite: false,
+        },
+        {
+            id: 18,
+            title: 'Sharks',
+            img: null,
+            song: music18,
             favorite: false,
         },
     ],
